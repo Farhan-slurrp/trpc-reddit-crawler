@@ -8,12 +8,7 @@ import React, { useEffect } from "react";
 const inter = Inter({ subsets: ["latin"] });
 
 export default function Home() {
-  let rendered = false;
-
-  if (!rendered) {
-    console.log(trpc.crawler.list.useQuery());
-    rendered = true;
-  }
+  console.log(trpc.crawler.list.useQuery({keyword: "macbook pro"}));
 
   return (
     <>

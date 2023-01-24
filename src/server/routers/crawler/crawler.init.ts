@@ -21,11 +21,9 @@ export default async function initScrapper() {
   })
 
   const page = await browser.newPage();
-  await page.setViewport({
-    width: 1920,
-    height: 1280,
-    deviceScaleFactor: 1,
-  });
+  
+  // Configure the navigation timeout
+  await page.setDefaultNavigationTimeout(0);
 
   return { browser, page };
 }

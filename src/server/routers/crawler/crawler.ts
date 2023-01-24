@@ -12,7 +12,7 @@ export const crawlerRouter = router({
     )
       .query(async ({ input }) => {
         const { keyword } = input;
-        console.log(await getData(keyword))
+        await getData(keyword)
 
         return {
           items: "reddit crawled"

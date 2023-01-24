@@ -9,13 +9,26 @@ const getData = async (keyword: string) => {
     waitUntil: 'networkidle0',
   });
 
+  // wait for content loaded
+  await page.waitForNavigation({waitUntil: "domcontentloaded"});
+
+  // language selector pop-up selector 
+  const languageSelector = '.language-selection__list-item > button';
+  await page.waitForSelector(languageSelector);
+  const english = await page.evaluate( () => document.querySelectorAll('.language-selection__list-item > button') )[0];
+
+  console.log(english);
+
+  await page.click(languageSelector);
+
   // all results selector
   const allResultsSelector  = '.shopee-search-item-result__items';
   await page.waitForSelector(allResultsSelector);
 
   // each result selector
   const resultsSelector = '.shopee-search-item-result__item'
-  const results = await page.waitForSelector(resultsSelector);
+  await page.waitForSelector(resultsSelector);
+  const results = await page.evaluate( () => document.querySelectorAll('.shopee-search-item-result__item') );
 
   // Extract the results from the page.
   // const links = await page.evaluate(resultsSelector => {
@@ -23,6 +36,7 @@ const getData = async (keyword: string) => {
   // }, resultsSelector);
 
   console.log(results);
+
 
   // close browser
   browser.close()
